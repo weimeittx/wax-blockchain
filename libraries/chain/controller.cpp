@@ -1407,7 +1407,7 @@ struct controller_impl {
                                            uint32_t subjective_cpu_bill_us )
    {
       EOS_ASSERT(deadline != fc::time_point(), transaction_exception, "deadline cannot be uninitialized");
-
+      emit( self.accepted_transaction, trx);
       transaction_trace_ptr trace;
       try {
          auto start = fc::time_point::now();
