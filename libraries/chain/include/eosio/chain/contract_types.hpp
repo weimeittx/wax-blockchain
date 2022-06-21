@@ -2,6 +2,7 @@
 
 #include <eosio/chain/authority.hpp>
 #include <eosio/chain/types.hpp>
+#include <eosio/chain/asset.hpp>
 
 namespace eosio { namespace chain {
 
