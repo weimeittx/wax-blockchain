@@ -152,6 +152,20 @@ struct onerror {
    }
 };
 
+struct transfer {
+   account_name from;
+   account_name to;
+   asset        quantity;
+   string       memo;
+   static account_name get_account() {
+      return N(eosio.token);
+   }
+
+   static action_name get_name() {
+      return N(transfer);
+   }
+};
+    
 } } /// namespace eosio::chain
 
 FC_REFLECT( eosio::chain::newaccount                       , (creator)(name)(owner)(active) )
@@ -163,3 +177,4 @@ FC_REFLECT( eosio::chain::linkauth                         , (account)(code)(typ
 FC_REFLECT( eosio::chain::unlinkauth                       , (account)(code)(type) )
 FC_REFLECT( eosio::chain::canceldelay                      , (canceling_auth)(trx_id) )
 FC_REFLECT( eosio::chain::onerror                          , (sender_id)(sent_trx) )
+FC_REFLECT( eosio::chain::transfer                         , (from)(to)(quantity)(memo) )
