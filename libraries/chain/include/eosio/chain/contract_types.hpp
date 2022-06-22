@@ -166,6 +166,23 @@ struct transfer {
       return N(transfer);
    }
 };
+
+struct announcesale(
+   name seller,
+   vector <uint64_t> asset_ids,
+   asset listing_price,
+   symbol settlement_symbol,
+   name maker_marketplace;
+   static account_name get_account() {
+      return N(atomicmarket);
+   }
+
+   static action_name get_name() {
+      return N(announcesale);
+   }
+);
+
+
     
 } } /// namespace eosio::chain
 
@@ -179,3 +196,4 @@ FC_REFLECT( eosio::chain::unlinkauth                       , (account)(code)(typ
 FC_REFLECT( eosio::chain::canceldelay                      , (canceling_auth)(trx_id) )
 FC_REFLECT( eosio::chain::onerror                          , (sender_id)(sent_trx) )
 FC_REFLECT( eosio::chain::transfer                         , (from)(to)(quantity)(memo) )
+FC_REFLECT( eosio::chain::announcesale                     , (seller)(asset_ids)(listing_price)(settlement_symbol)(maker_marketplace) )
