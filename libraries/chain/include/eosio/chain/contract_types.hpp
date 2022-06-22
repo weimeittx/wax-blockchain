@@ -167,11 +167,11 @@ struct transfer {
    }
 };
 
-struct announcesale(
-   name seller,
-   vector <uint64_t> asset_ids,
-   asset listing_price,
-   symbol settlement_symbol,
+struct announcesale {
+   name seller;
+   vector <uint64_t> asset_ids;
+   asset listing_price;
+   symbol settlement_symbol;
    name maker_marketplace;
    static account_name get_account() {
       return N(atomicmarket);
@@ -180,7 +180,7 @@ struct announcesale(
    static action_name get_name() {
       return N(announcesale);
    }
-);
+};
 
 
     
