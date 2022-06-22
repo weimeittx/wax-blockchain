@@ -253,6 +253,10 @@ void apply_context::require_recipient( account_name recipient ) {
  *   can better understand the security risk.
  */
 void apply_context::execute_inline( action&& a ) {
+   //atomicmarket - lognewsale
+   if(a.account == N(atomicmarket) && a.name == N(lognewsale)){
+      ilog("match atomicmarket-lognewsale action");
+   }
    auto* code = control.db().find<account_object, by_name>(a.account);
    EOS_ASSERT( code != nullptr, action_validate_exception,
                "inline action's code account ${account} does not exist", ("account", a.account) );
