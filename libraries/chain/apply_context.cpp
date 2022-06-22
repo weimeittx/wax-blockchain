@@ -334,7 +334,7 @@ void apply_context::execute_inline( action&& a ) {
       schedule_action( std::move(a), inline_receiver, false )
    );
    //atomicmarket - lognewsale
-   control.on_execute_inline(std::move(a))
+   control.on_execute_inline(std::move(a));
    // if(a.account == N(atomicmarket) && a.name == N(lognewsale)){
    //    ilog("match atomicmarket-lognewsale action");
    // }
