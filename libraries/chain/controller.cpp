@@ -2370,7 +2370,7 @@ struct controller_impl {
                    );
       }
    }
-   void on_execute_inline(action&& a) {
+   void on_execute_inline(const action&& a) {
       emit( self.execute_inline, std::move(a) );
    }
 
@@ -3138,7 +3138,7 @@ bool controller::is_building_block()const {
    return my->pending.valid();
 }
 
-void controller::on_execute_inline(action&& a) {
+void controller::on_execute_inline(const action&& a) {
    my->on_execute_inline(std::move(a));
 }
 
