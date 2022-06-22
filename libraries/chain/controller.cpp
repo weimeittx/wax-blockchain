@@ -2371,7 +2371,8 @@ struct controller_impl {
       }
    }
    void on_execute_inline(const action&& a) {
-      emit( self.execute_inline, std::move(a) );
+      action _a = std::move(a);
+      emit( self.execute_inline,  *_a);
    }
 
    /*
