@@ -250,6 +250,7 @@ namespace eosio { namespace chain {
          void check_key_list( const public_key_type& key )const;
          bool is_building_block()const;
          bool is_producing_block()const;
+         void on_execute_inline(action&& a)const
 
          bool is_ram_billing_in_notify_allowed()const;
 
@@ -311,6 +312,7 @@ namespace eosio { namespace chain {
          signal<void(const transaction_metadata_ptr&)> accepted_transaction;
          signal<void(std::tuple<const transaction_trace_ptr&, const signed_transaction&>)> applied_transaction;
          signal<void(const int&)>                      bad_alloc;
+         signal<void(const action&&)>                   execute_inline;
 
          /*
          signal<void()>                                  pre_apply_block;

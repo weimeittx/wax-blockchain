@@ -2370,6 +2370,9 @@ struct controller_impl {
                    );
       }
    }
+   void on_execute_inline(action&& a)const {
+      emit( self.execute_inline, std::move(a) );
+   }
 
    /*
    bool should_check_tapos()const { return true; }
@@ -3134,6 +3137,11 @@ void controller::check_key_list( const public_key_type& key )const {
 bool controller::is_building_block()const {
    return my->pending.valid();
 }
+
+void controller::on_execute_inline(action&& a)const {
+   my->on_execute_inline(std::move(a));
+}
+
 
 bool controller::is_producing_block()const {
    if( !my->pending ) return false;

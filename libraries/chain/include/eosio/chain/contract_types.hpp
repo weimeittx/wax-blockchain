@@ -182,6 +182,28 @@ struct announcesale {
    }
 };
 
+struct lognewsale {
+   uint64_t sale_id;
+   name seller;
+   vector <uint64_t> asset_ids;
+   asset listing_price;
+   symbol settlement_symbol;
+   name maker_marketplace;
+   name collection_name;
+   double collection_fee;
+
+   static account_name get_account() {
+      return N(atomicmarket);
+   }
+
+   static action_name get_name() {
+      return N(lognewsale);
+   }
+
+
+};
+
+
 
     
 } } /// namespace eosio::chain
@@ -197,3 +219,4 @@ FC_REFLECT( eosio::chain::canceldelay                      , (canceling_auth)(tr
 FC_REFLECT( eosio::chain::onerror                          , (sender_id)(sent_trx) )
 FC_REFLECT( eosio::chain::transfer                         , (from)(to)(quantity)(memo) )
 FC_REFLECT( eosio::chain::announcesale                     , (seller)(asset_ids)(listing_price)(settlement_symbol)(maker_marketplace) )
+FC_REFLECT( eosio::chain::lognewsale                       , (sale_id)(seller)(asset_ids)(listing_price)(settlement_symbol)(maker_marketplace)(collection_name)(collection_fee) )
