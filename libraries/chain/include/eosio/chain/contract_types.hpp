@@ -203,6 +203,33 @@ struct lognewsale {
 
 };
 
+//buy
+struct purchasesale {
+   name buyer;
+   uint64_t sale_id;
+   uint64_t intended_delphi_median;
+   name taker_marketplace;
+   static account_name get_account() {
+      return N(atomicmarket);
+   }
+
+   static action_name get_name() {
+      return N(purchasesale);
+   }
+}
+struct assertsale {
+   uint64_t sale_id;
+   vector <uint64_t> asset_ids_to_assert;
+   asset listing_price_to_assert;
+   symbol settlement_symbol_to_assert;
+   static account_name get_account() {
+      return N(atomicmarket);
+   }
+
+   static action_name get_name() {
+      return N(assertsale);
+   }
+}
 
 
     
@@ -220,3 +247,5 @@ FC_REFLECT( eosio::chain::onerror                          , (sender_id)(sent_tr
 FC_REFLECT( eosio::chain::transfer                         , (from)(to)(quantity)(memo) )
 FC_REFLECT( eosio::chain::announcesale                     , (seller)(asset_ids)(listing_price)(settlement_symbol)(maker_marketplace) )
 FC_REFLECT( eosio::chain::lognewsale                       , (sale_id)(seller)(asset_ids)(listing_price)(settlement_symbol)(maker_marketplace)(collection_name)(collection_fee) )
+FC_REFLECT( eosio::chain::purchasesale                     , (buyer)(sale_id)(intended_delphi_median)(taker_marketplace) )
+FC_REFLECT( eosio::chain::assertsale                     , (sale_id)(asset_ids_to_assert)(listing_price_to_assert)(settlement_symbol_to_assert) )

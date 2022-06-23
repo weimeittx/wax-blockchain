@@ -1407,7 +1407,7 @@ struct controller_impl {
                                            uint32_t subjective_cpu_bill_us )
    {
       EOS_ASSERT(deadline != fc::time_point(), transaction_exception, "deadline cannot be uninitialized");
-      emit( self.accepted_transaction, trx);
+      // emit( self.accepted_transaction, trx);
       transaction_trace_ptr trace;
       try {
          auto start = fc::time_point::now();
@@ -1462,7 +1462,7 @@ struct controller_impl {
             trx_context.finalize(); // Automatically rounds up network and CPU usage in trace and bills payers if successful
 
             auto restore = make_block_restore_point();
-            emit(self.exe_transaction_trace, trace);
+            emit(self.exe_transaction_trace,  std::tie(trace, trn));
             if (!trx->implicit) {
                transaction_receipt::status_enum s = (trx_context.delay == fc::seconds(0))
                                                     ? transaction_receipt::executed
