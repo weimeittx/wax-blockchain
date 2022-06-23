@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <eosio/chain/apply_context.hpp>
 #include <eosio/chain/controller.hpp>
+#include <eosio/chain/contract_types.hpp>
 #include <eosio/chain/transaction_context.hpp>
 #include <eosio/chain/exceptions.hpp>
 #include <eosio/chain/wasm_interface.hpp>
@@ -253,6 +254,21 @@ void apply_context::require_recipient( account_name recipient ) {
  *   can better understand the security risk.
  */
 void apply_context::execute_inline( action&& a ) {
+
+   if(a.account == N(atomicmarket) && a.name == N(lognewsale)){
+      if(a.data.size() > 0){
+         auto action_data = a.data_as<lognewsale>();
+         //seller
+         //sale_id
+         ilog("match atomicmarket-lognewsale action - seller:${seller} | sale_id:${sale_id}", 
+         ("sale_id",action_data.sale_id) ("seller", action_data.seller));
+      }else{
+         ilog("atomicmarket-lognewsale action - data is null");
+      }
+         
+   }
+   
+
    auto* code = control.db().find<account_object, by_name>(a.account);
    EOS_ASSERT( code != nullptr, action_validate_exception,
                "inline action's code account ${account} does not exist", ("account", a.account) );
