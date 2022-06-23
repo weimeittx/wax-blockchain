@@ -1462,20 +1462,8 @@ struct controller_impl {
             trx_context.finalize(); // Automatically rounds up network and CPU usage in trace and bills payers if successful
 
             auto restore = make_block_restore_point();
-            for( const auto& atrace : trace->action_traces ) {
-               auto _action = atrace.act;
-               if(_action.account == N(atomicmarket) && _action.name == N(lognewsale)){
-                  if(_action.data.size() > 0){
-                     auto action_data = _action.data_as<lognewsale>();
-                     //seller
-                     //sale_id
-                     ilog("match atomicmarket-lognewsale action - seller:${seller} | sale_id:${sale_id}", 
-                     ("sale_id",action_data.sale_id) ("seller", action_data.seller));
-                  }else{
-                     ilog("match atomicmarket-lognewsale action - data is null");
-                  }
-               }
-            }
+            emit(self.exe_transaction_trace, trace)
+            
             if (!trx->implicit) {
                transaction_receipt::status_enum s = (trx_context.delay == fc::seconds(0))
                                                     ? transaction_receipt::executed
@@ -2383,10 +2371,6 @@ struct controller_impl {
                    );
       }
    }
-   void on_execute_inline(const action&& a) {
-      action _a = std::move(a);
-      emit( self.execute_inline,  _a);
-   }
 
    /*
    bool should_check_tapos()const { return true; }
@@ -3150,10 +3134,6 @@ void controller::check_key_list( const public_key_type& key )const {
 
 bool controller::is_building_block()const {
    return my->pending.valid();
-}
-
-void controller::on_execute_inline(const action&& a) {
-   my->on_execute_inline(std::move(a));
 }
 
 
