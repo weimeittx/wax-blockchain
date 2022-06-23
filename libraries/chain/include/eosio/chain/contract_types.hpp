@@ -229,7 +229,7 @@ struct assertsale {
    static action_name get_name() {
       return N(assertsale);
    }
-}
+};
 
 
     
