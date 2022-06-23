@@ -1462,8 +1462,7 @@ struct controller_impl {
             trx_context.finalize(); // Automatically rounds up network and CPU usage in trace and bills payers if successful
 
             auto restore = make_block_restore_point();
-            emit(self.exe_transaction_trace, trace)
-            
+            emit(self.exe_transaction_trace, trace);
             if (!trx->implicit) {
                transaction_receipt::status_enum s = (trx_context.delay == fc::seconds(0))
                                                     ? transaction_receipt::executed
