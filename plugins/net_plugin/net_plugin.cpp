@@ -290,6 +290,7 @@ namespace eosio {
       void on_accepted_block( const block_state_ptr& bs );
       void on_pre_accepted_block( const signed_block_ptr& bs );
       void transaction_ack(const std::pair<fc::exception_ptr, transaction_metadata_ptr>&);
+      void fast_bcast_transaction(const packed_transaction& trx);
       void on_irreversible_block( const block_state_ptr& blk );
 
       void start_conn_timer(boost::asio::steady_timer::duration du, std::weak_ptr<connection> from_connection);
@@ -3236,6 +3237,11 @@ namespace eosio {
       });
    }
 
+   void net_plugin_impl::fast_bcast_transaction(const packed_transaction& trx){
+      dispatcher->bcast_transaction(trx);
+   }
+   
+
    bool net_plugin_impl::authenticate_peer(const handshake_message& msg) const {
       if(allowed_connections == None)
          return false;
@@ -3604,6 +3610,10 @@ namespace eosio {
 
    void net_plugin::handle_sighup() {
       fc::logger::update( logger_name, logger );
+   }
+
+   void net_plugin::fast_bcast_transaction(const packed_transaction& trx){
+      my->fast_bcast_transaction(trx);
    }
 
    void net_plugin::plugin_shutdown() {

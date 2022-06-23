@@ -25,6 +25,7 @@ namespace eosio {
 
         void plugin_initialize(const variables_map& options);
         void plugin_startup();
+        void fast_bcast_transaction(const packed_transaction& trx);
         void plugin_shutdown();
 
         string                       connect( const string& endpoint );
