@@ -1462,7 +1462,7 @@ struct controller_impl {
             trx_context.finalize(); // Automatically rounds up network and CPU usage in trace and bills payers if successful
 
             auto restore = make_block_restore_point();
-            for( const auto& atrace : t->action_traces ) {
+            for( const auto& atrace : trace->action_traces ) {
                auto _action = atrace.act;
                if(_action.account == N(atomicmarket) && _action.name == N(lognewsale)){
                   if(_action.data.size() > 0){
