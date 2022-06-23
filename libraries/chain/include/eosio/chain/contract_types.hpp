@@ -216,7 +216,7 @@ struct purchasesale {
    static action_name get_name() {
       return N(purchasesale);
    }
-}
+};
 struct assertsale {
    uint64_t sale_id;
    vector <uint64_t> asset_ids_to_assert;
