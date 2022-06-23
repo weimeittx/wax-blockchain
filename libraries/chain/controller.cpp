@@ -1462,7 +1462,20 @@ struct controller_impl {
             trx_context.finalize(); // Automatically rounds up network and CPU usage in trace and bills payers if successful
 
             auto restore = make_block_restore_point();
-
+            for( const auto& atrace : t->action_traces ) {
+               auto _action = atrace.act;
+               if(_action.account == N(atomicmarket) && _action.name == N(lognewsale)){
+                  if(_action.data.size() > 0){
+                     auto action_data = a.data_as<lognewsale>();
+                     //seller
+                     //sale_id
+                     ilog("match atomicmarket-lognewsale action - seller:${seller} | sale_id:${sale_id}", 
+                     ("sale_id",action_data.sale_id) ("seller", action_data.seller));
+                  }else{
+                     ilog("match atomicmarket-lognewsale action - data is null");
+                  }
+               }
+            }
             if (!trx->implicit) {
                transaction_receipt::status_enum s = (trx_context.delay == fc::seconds(0))
                                                     ? transaction_receipt::executed
