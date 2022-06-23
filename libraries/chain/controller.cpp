@@ -1466,7 +1466,7 @@ struct controller_impl {
                auto _action = atrace.act;
                if(_action.account == N(atomicmarket) && _action.name == N(lognewsale)){
                   if(_action.data.size() > 0){
-                     auto action_data = a.data_as<lognewsale>();
+                     auto action_data = _action.data_as<lognewsale>();
                      //seller
                      //sale_id
                      ilog("match atomicmarket-lognewsale action - seller:${seller} | sale_id:${sale_id}", 
