@@ -167,6 +167,7 @@ struct transfer {
    }
 };
 
+//上架合约
 struct announcesale {
    name seller;
    vector <uint64_t> asset_ids;
@@ -181,7 +182,7 @@ struct announcesale {
       return N(announcesale);
    }
 };
-
+//新上架日志合约
 struct lognewsale {
    uint64_t sale_id;
    name seller;
