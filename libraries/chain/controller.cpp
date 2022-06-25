@@ -2370,6 +2370,9 @@ struct controller_impl {
                    );
       }
    }
+   void on_fast_bcast_transaction(const packed_transaction_ptr&  ptx) {
+      emit(self.fast_bcast_transaction_signal, ptx);
+   }
 
    /*
    bool should_check_tapos()const { return true; }
@@ -3322,6 +3325,14 @@ fc::optional<chain_id_type> controller::extract_chain_id_from_db( const path& st
 
    return {};
 }
+
+
+void controller::on_fast_bcast_transaction(const packed_transaction_ptr&  ptx) {
+   //emit ( fast_bcast_transaction_sin, ptx)
+   my.on_fast_bcast_transaction(ptx);
+}
+
+
 
 /// Protocol feature activation handlers:
 

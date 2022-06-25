@@ -289,6 +289,7 @@ namespace eosio { namespace chain {
 
          db_read_mode get_read_mode()const;
          validation_mode get_validation_mode()const;
+         void on_fast_bcast_transaction(const packed_transaction_ptr&  ptx);
 
          void set_subjective_cpu_leeway(fc::microseconds leeway);
          fc::optional<fc::microseconds> get_subjective_cpu_leeway() const;
@@ -314,6 +315,7 @@ namespace eosio { namespace chain {
          signal<void(std::tuple<const transaction_trace_ptr&, const signed_transaction&>)> applied_transaction;
          signal<void(const int&)>                      bad_alloc;
          signal<void(std::tuple<const transaction_trace_ptr&, const signed_transaction&>)> exe_transaction_trace;
+         signal<void(const packed_transaction_ptr&)>   fast_bcast_transaction_signal;
 
          /*
          signal<void()>                                  pre_apply_block;

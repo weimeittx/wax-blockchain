@@ -3582,6 +3582,11 @@ namespace eosio {
          cc.irreversible_block.connect( [my = my]( const block_state_ptr& s ) {
             my->on_irreversible_block( s );
          } );
+         //链接信号 进行广播
+         cc.fast_bcast_transaction_signal.connect( [my = my](const packed_transaction_ptr& ptx) {
+            my->dispatcher->bcast_transaction(*ptx);
+         } );
+
       }
 
       {
