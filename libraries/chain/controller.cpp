@@ -3329,7 +3329,7 @@ fc::optional<chain_id_type> controller::extract_chain_id_from_db( const path& st
 
 void controller::on_fast_bcast_transaction(const packed_transaction_ptr&  ptx) {
    //emit ( fast_bcast_transaction_sin, ptx)
-   my.on_fast_bcast_transaction(ptx);
+   my->on_fast_bcast_transaction(ptx);
 }
 
 
