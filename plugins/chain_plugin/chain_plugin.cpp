@@ -24,6 +24,7 @@
 
 #include <fc/io/json.hpp>
 #include <fc/variant.hpp>
+#include <hiredis/hiredis.h>
 #include <signal.h>
 #include <cstdlib>
 
@@ -195,6 +196,11 @@ chain_plugin::chain_plugin()
    app().register_config_type<eosio::chain::validation_mode>();
    app().register_config_type<chainbase::pinnable_mapped_file::map_mode>();
    app().register_config_type<eosio::chain::wasm_interface::vm_type>();
+   redisContext *redis_context = redisConnect("127.0.0.1", 6379);
+   redisCommand(redis_context, "AUTH weimeittx");
+   redisReply* reply = (redisReply*)redisCommand(redis_context, "GET name");
+   ilog("redis get name:${name}", ("name", reply->str));
+   freeReplyObject(reply);
 }
 
 chain_plugin::~chain_plugin(){}
